@@ -7,6 +7,7 @@ printf %s 'backend web-backend
         balance roundrobin
         server 4809-web-01 52.73.182.183 check
         server 4809-web-02 54.226.199.160 check
+
 frontend http
         bind *:80
         mode http
