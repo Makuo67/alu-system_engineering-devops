@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+=======
+#!/usr/bin/env bash
+# This script install and configure haproxy.
+# update system and install haproxy
+sudo apt update
+sudo apt install haproxy -y
+load_balance_config=\
+"backend my_servers
+        balance roundrobin
+        server 4809-web-01 52.73.182.183
+        server 4809-web-02 54.226.199.160
+frontend haproxy_inbound
+        bind *:80
+        default_backend my_servers
+        mode http
+"
+# enable haproxy to be managed by init script
+sudo chown -R "$USER":"$USER" /etc/default/haproxy
+sudo chown -R "$USER":"$USER" /etc/haproxy/haproxy.cfg
+sudo echo "ENABLED=1" >> /etc/default/haproxy
+sudo echo $load_balance_config >> /etc/haproxy/haproxy.cfg
+sudo service haproxy start
+>>>>>>> 903ae985e99fa55442cd4d2190a3e7d66ff77da2
