@@ -17,3 +17,4 @@ new_config=\
 sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
 echo "$new_config" > /etc/nginx/sites-available/default
 sudo service nginx restart
+sudo lsof -i TCP:80
