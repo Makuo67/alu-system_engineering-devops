@@ -3,13 +3,16 @@
 sudo apt update -y
 sudo apt install haproxy -y
 echo 'ENABLED=1' | sudo tee -a /etc/default/haproxy
-printf %s 'backend web-backend
-        balance roundrobin
-	server 4809-web-01 52.73.182.183:80 check
-        server 4809-web-02 54.226.199.160:80 check
-frontend http
+load_balance_config=\
+"frontend firstbalance
         bind *:80
-        mode http
-        default_backend web-backend
-' | sudo tee -a /etc/haproxy/haproxy.cfg
+        option forwardfor
+        default_backend webservers
+backend webservers
+        balance roundrobin
+        server 4809-web-01 52.73.182.183:80 check
+        server 4809-web-02 54.226.199.160:80 check
+        option httpchk
+"
+| sudo tee -a /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
