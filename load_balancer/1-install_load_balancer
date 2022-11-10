@@ -10,8 +10,8 @@ load_balance_config=\
         default_backend webservers
 backend webservers
         balance roundrobin
-        server 4809-web-01 52.73.182.183:80 check
-        server 4809-web-02 54.226.199.160:80 check
+        server makuo4809-web-01 52.73.182.183:80 check
+        server makuo4809-web-02 54.226.199.160:80 check
         option httpchk
 "
 sudo chown -R "$USER":"$USER" /etc/default/haproxy
