@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Debugging Nginx to listen to port 80
-port_regex="listen\s.[0-9]+\sdefault_server"
+port_regex="listen\s[0-9]+\sdefault_server"
 port_80_config="listen 80 default_server"
 
-ipv6_regex="listen\s\[::\]:.[0-9]\sdefault_server"
+ipv6_regex="listen\s\[::\]:[0-9]+\sdefault_server"
 port_80_ipv6="listen [::]:80 default_server"
 
 sed -ri "s/$port_regex/$port_80_config/" /etc/nginx/sites-available/default
